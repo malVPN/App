@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>မအလဗီပီအန်</title>
+    <style>
+        .center {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn {
+            background-color: DodgerBlue;
+            border: none;
+            color: white;
+            padding: 12px 30px;
+            cursor: pointer;
+            font-size: 20px;
+        }
+
+        /* Darker background on mouse-over */
+        .btn:hover {
+            background-color: RoyalBlue;
+        }
+
+        #customers {
+            margin-bottom: 5%;
+            margin-top: 5%;
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        #customers td,
+        #customers th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        #customers tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        #customers tr:hover {
+            background-color: #ddd;
+        }
+
+        #customers th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        #snackbar {
+            visibility: hidden;
+            min-width: 250px;
+            margin-left: -125px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 2px;
+            padding: 16px;
+            position: fixed;
+            z-index: 1;
+            left: 50%;
+            bottom: 30px;
+            font-size: 17px;
+        }
+
+        #snackbar.show {
+            visibility: visible;
+            -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+            animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        }
+
+        @-webkit-keyframes fadein {
+            from {
+                bottom: 0;
+                opacity: 0;
+            }
+
+            to {
+                bottom: 30px;
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadein {
+            from {
+                bottom: 0;
+                opacity: 0;
+            }
+
+            to {
+                bottom: 30px;
+                opacity: 1;
+            }
+        }
+
+        @-webkit-keyframes fadeout {
+            from {
+                bottom: 30px;
+                opacity: 1;
+            }
+
+            to {
+                bottom: 0;
+                opacity: 0;
+            }
+        }
+
+        @keyframes fadeout {
+            from {
+                bottom: 30px;
+                opacity: 1;
+            }
+
+            to {
+                bottom: 0;
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="center">
+        <img class="center" style="height: 100px;margin-top: 5%;"
+            src="https://1.bp.blogspot.com/-K6ZU3cblO1s/YDdCkNLeP1I/AAAAAAABNiQ/z-FqrkoUAHkuYCUT7Yy_6sB4SaJclQhygCLcBGAsYHQ/s0/ic_launcher.png" />
+        <table id="customers">
+            <tr>
+                <th>အမည်</th>
+                <th>မအလဗီပီအန်</th>
+            </tr>
+            <tr>
+                <td>ဗားရှင်း</td>
+                <td>1.0</td>
+            </tr>
+            <tr>
+                <td>ဖိုင်ဆိုဒ်</td>
+                <td id="file-size">10 MB</td>
+            </tr>
+            <tr>
+                <td>လိုအပ်ချက်</td>
+                <td>Android 5.0+</td>
+            </tr>
+        </table>
+
+
+        <button class="btn" style="width:100%" onclick="let_download();">↯ ရယူရန်</button>
+
+        <script>
+            var main_data = {
+                "arm64-v8a": ["6.45 MB","https://drive.google.com/file/d/1BPZuw8ehNXJ5A8rL2v5id8YpfjAEU7WC/"],
+                "armeabi-v7a": ["6.11 MB","https://drive.google.com/file/d/16B4WIfRkvPPxtCV7dzCFQaTifvgDfTtN/"],
+                "universal": ["11.7 MB","https://drive.google.com/file/d/1Tx4SpOuTkAy2ogc9ygARQYiol3RIUX3K/"],
+                "x86": ["6.48 MB","https://drive.google.com/file/d/1WAdnufsNIdcN0SH_aBMjvwvF_N_eTE5Y/"],
+                "x86_64": ["6.54 MB","https://drive.google.com/file/d/1B9-jEu3NYRjWQizMwF-jxi-A9lQW131h/"]
+            }
+            var abi = get_abi();
+            var cur_data = main_data[abi];
+
+            function let_download() {
+                dl(get_drive_link(cur_data[1]));
+                showToast();
+            }
+
+            function dl(url) {
+                var anchor = document.createElement('a');
+                anchor.setAttribute('href', url);
+                anchor.setAttribute('download', document.title);
+                anchor.style.display = 'none';
+                document.body.appendChild(anchor);
+                anchor.click();
+                document.body.removeChild(anchor);
+            }
+
+            function showToast() {
+                var x = document.getElementById("snackbar");
+                x.className = "show";
+                setTimeout(function () { x.className = x.className.replace("show", ""); }, 3000);
+            }
+
+            //Files
+            function getDigitOnly(str) {
+                return str.replace(/\D/g, '');
+            }
+
+            function replaceUnwanted(str) {
+                return str.replace(/[123590]/g, '');
+            }
+
+            function get_abi() {
+                var platform = replaceUnwanted(getDigitOnly(navigator.platform));
+                var abi = "universal";
+                if (platform == '8') {
+                    abi = "arm64-v8a";
+                } else if (platform == '7') {
+                    abi = "armeabi-v7a";
+                } else if (platform.endsWith("86")) {
+                    abi = "x86";
+                } else if (platform.endsWith("64")) {
+                    abi = "x86_64";
+                }
+                return abi;
+            }
+
+            document.getElementById('file-size').innerHTML = cur_data[0];
+
+            // function get_download_link(abi) {
+            //     return 'https://github.com/malVPN/App/raw/main/malVPN_1.0-' + abi + '-release.apk';
+            // }
+
+            function get_drive_link(url){
+                return "https://www.googleapis.com/drive/v3/files/"+get_drive_id(url)+"?alt=media&key=AIzaSyBFHimHWDyLOtcNJjA268KwRLhsBuckUxc";
+            }
+
+            function get_drive_id(url){
+                return url.match(/[-\w]{25,}/);
+            }
+
+        </script>
+    </div>
+    <div id="snackbar">ရယူနေပါသည်။</div>
+</body>
+
+</html>
