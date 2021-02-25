@@ -156,15 +156,7 @@
         <button class="btn" style="width:100%" onclick="let_download();">↯ ရယူရန်</button>
 
         <script>
-            var main_data = {
-                "arm64-v8a": ["6.45 MB","https://drive.google.com/file/d/1BPZuw8ehNXJ5A8rL2v5id8YpfjAEU7WC/"],
-                "armeabi-v7a": ["6.11 MB","https://drive.google.com/file/d/16B4WIfRkvPPxtCV7dzCFQaTifvgDfTtN/"],
-                "universal": ["11.7 MB","https://drive.google.com/file/d/1Tx4SpOuTkAy2ogc9ygARQYiol3RIUX3K/"],
-                "x86": ["6.48 MB","https://drive.google.com/file/d/1WAdnufsNIdcN0SH_aBMjvwvF_N_eTE5Y/"],
-                "x86_64": ["6.54 MB","https://drive.google.com/file/d/1B9-jEu3NYRjWQizMwF-jxi-A9lQW131h/"]
-            }
-            var abi = get_abi();
-            var cur_data = main_data[abi];
+            var cur_data = ["11.7 MB","https://drive.google.com/file/d/1Tx4SpOuTkAy2ogc9ygARQYiol3RIUX3K/"];
 
             function let_download() {
                 dl(get_drive_link(cur_data[1]));
