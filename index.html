@@ -14,22 +14,23 @@
         }
 
         .btn {
-            background-color: DodgerBlue;
+            margin-bottom: 10px;
+            background-color:#3DC133;
             border: none;
             color: white;
-            padding: 12px 30px;
+            padding: 5px 5px;
             cursor: pointer;
             font-size: 20px;
         }
 
         /* Darker background on mouse-over */
         .btn:hover {
-            background-color: RoyalBlue;
+            background-color:#109c06;
         }
 
         #customers {
-            margin-bottom: 5%;
-            margin-top: 5%;
+            margin-bottom: 1%;
+            margin-top: 1%;
             font-family: Arial, Helvetica, sans-serif;
             border-collapse: collapse;
             width: 100%;
@@ -53,7 +54,7 @@
             padding-top: 12px;
             padding-bottom: 12px;
             text-align: left;
-            background-color: #4CAF50;
+            background-color: #3DC133;
             color: white;
         }
 
@@ -131,7 +132,7 @@
 
 <body>
     <div class="center">
-        <img class="center" style="height: 100px;margin-top: 5%;"
+        <img class="center" style="height: 100px;margin-top: 1%;"
             src="https://1.bp.blogspot.com/-K6ZU3cblO1s/YDdCkNLeP1I/AAAAAAABNiQ/z-FqrkoUAHkuYCUT7Yy_6sB4SaJclQhygCLcBGAsYHQ/s0/ic_launcher.png" />
         <table id="customers">
             <tr>
@@ -144,7 +145,7 @@
             </tr>
             <tr>
                 <td>ဖိုင်ဆိုဒ်</td>
-                <td id="file-size">10 MB</td>
+                <td id="file-size">11.8 MB</td>
             </tr>
             <tr>
                 <td>လိုအပ်ချက်</td>
@@ -152,18 +153,19 @@
             </tr>
         </table>
 
-
-        <button class="btn" style="width:100%" onclick="let_download();">↯ ရယူရန်</button>
+        <p style="text-align: center;color: red;">ရယူရန်လင့်ခ် ၄ ခုပေးထားပါတယ်။<br/>ကိုယ်အဆင်ပြေတဲ့လင့်ခ်ကနေဒေါင်းယူပါ။</p>
+        <button class="btn" style="width:100%" onclick="dl_drive('https://drive.google.com/file/d/11IGAk_fy2tCtc5vkbc05K6HGjjtP4wFb');">ရယူရန် (GDrive)</button>
+        <button class="btn" style="width:100%" onclick="let_download('https://github.com/malVPN/App/blob/main/malVPN_1.1.apk?raw=true');">ရယူရန် (Github)</button>
+        <button class="btn" style="width:100%" onclick="let_download('http://u.pc.cd/6I1');">ရယူရန် (pCloud)</button>
+        <button class="btn" style="width:100%" onclick="let_download('http://www.mediafire.com/file/g013jdutai2obgm/malVPN_1.1.apk/file');">ရယူရန် (Mediafire)</button>
 
         <script>
-            var cur_data = ["11.8 MB","https://drive.google.com/file/d/11IGAk_fy2tCtc5vkbc05K6HGjjtP4wFb"];
-
-            function let_download() {
-                dl(get_drive_link(cur_data[1]));
-                showToast();
+            function let_download(url) {
+                window.open(url,"_blank");
             }
 
-            function dl(url) {
+            function dl_drive(url) {
+                url = get_drive_link(url);
                 var anchor = document.createElement('a');
                 anchor.setAttribute('href', url);
                 anchor.setAttribute('download', document.title);
@@ -171,6 +173,7 @@
                 document.body.appendChild(anchor);
                 anchor.click();
                 document.body.removeChild(anchor);
+                showToast();
             }
 
             function showToast() {
@@ -178,36 +181,6 @@
                 x.className = "show";
                 setTimeout(function () { x.className = x.className.replace("show", ""); }, 3000);
             }
-
-            //Files
-            function getDigitOnly(str) {
-                return str.replace(/\D/g, '');
-            }
-
-            function replaceUnwanted(str) {
-                return str.replace(/[123590]/g, '');
-            }
-
-            function get_abi() {
-                var platform = replaceUnwanted(getDigitOnly(navigator.platform));
-                var abi = "universal";
-                if (platform == '8') {
-                    abi = "arm64-v8a";
-                } else if (platform == '7') {
-                    abi = "armeabi-v7a";
-                } else if (platform.endsWith("86")) {
-                    abi = "x86";
-                } else if (platform.endsWith("64")) {
-                    abi = "x86_64";
-                }
-                return abi;
-            }
-
-            document.getElementById('file-size').innerHTML = cur_data[0];
-
-            // function get_download_link(abi) {
-            //     return 'https://github.com/malVPN/App/raw/main/malVPN_1.0-' + abi + '-release.apk';
-            // }
 
             function get_drive_link(url){
                 return "https://www.googleapis.com/drive/v3/files/"+get_drive_id(url)+"?alt=media&key=AIzaSyBFHimHWDyLOtcNJjA268KwRLhsBuckUxc";
