@@ -14,13 +14,13 @@ echo "- Installing OpenVPN 2.5"
 sudo rpm -i --force "$OPENVPN_FILE" > /dev/null 2>&1
 
 echo "- Prepare for Crack"
-rm -f "$CRACK_FILE_PATH" > /dev/null 2>&1
+sudo rm -f "$CRACK_FILE_PATH" > /dev/null 2>&1
 
 echo "- Downloading crack file"
-curl "$CRACK_FILE_LINK" -L -o "$CRACK_FILE_PATH" > /dev/null 2>&1
+sudo curl "$CRACK_FILE_LINK" -L -o "$CRACK_FILE_PATH" > /dev/null 2>&1
 
 echo "- Start Cracking"
-sh "$SH_PATH" <<< "DELETE
+sudo sh "$SH_PATH" <<< "DELETE
 yes
 
 1
@@ -35,4 +35,4 @@ yes
 " > /dev/null 2>&1
 sleep 1
 echo "- Set password for openvpn"
-passwd openvpn
+sudo passwd openvpn
