@@ -5,11 +5,6 @@
 # Email: khunhtetznaing@gmail.com
 ############################################################
 
-if [ `whoami` != root ]; then
-    echo "ERROR: You need to run the script as user root or add sudo before command."
-    exit 1
-fi
-
 OPENVPN_FILE="https://github.com/KhunHtetzNaing/Files/releases/download/malVPN/openvpn-as-2.5-CentOS7.x86_64.rpm"
 CRACK_FILE_PATH="/usr/local/openvpn_as/lib/python2.7/site-packages/pyovpn-2.0-py2.7.egg"
 CRACK_FILE_LINK="https://github.com/KhunHtetzNaing/Files/releases/download/malVPN/pyovpn-2.0-py2.7.egg"
