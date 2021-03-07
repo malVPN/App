@@ -1,6 +1,6 @@
 #!/bin/bash
 ############################################################
-# OpenVPN 2.5 CRACKED Installer
+# OpenVPN 2.5 MOD Installer
 # Author: Khun Htetz Naing
 # Email: khunhtetznaing@gmail.com
 ############################################################
@@ -10,16 +10,16 @@ CRACK_FILE_PATH="/usr/local/openvpn_as/lib/python2.7/site-packages/pyovpn-2.0-py
 CRACK_FILE_LINK="https://github.com/KhunHtetzNaing/Files/releases/download/malVPN/pyovpn-2.0-py2.7.egg"
 SH_PATH="/usr/local/openvpn_as/bin/ovpn-init"
 
-echo "- Installing OpenVPN 2.5"
+echo "=> Installing OpenVPN 2.5 <="
 sudo rpm -i --force "$OPENVPN_FILE" > /dev/null 2>&1
 
-echo "- Prepare for Crack"
+echo "  - Prepare for Crack."
 sudo rm -f "$CRACK_FILE_PATH" > /dev/null 2>&1
 
-echo "- Downloading crack file"
+echo "  - Downloading crack file."
 sudo curl "$CRACK_FILE_LINK" -L -o "$CRACK_FILE_PATH" > /dev/null 2>&1
 
-echo "- Start Cracking"
+echo "  - Start cracking..."
 sudo sh "$SH_PATH" <<< "DELETE
 yes
 
@@ -34,5 +34,6 @@ yes
 
 " > /dev/null 2>&1
 sleep 3
-echo "- Set password for openvpn"
+echo "  - Set a password for openvpn"
 sudo passwd openvpn
+echo "=> DONE <="
