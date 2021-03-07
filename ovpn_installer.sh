@@ -11,16 +11,16 @@ CRACK_FILE_LINK="https://github.com/KhunHtetzNaing/Files/releases/download/malVP
 SH_PATH="/usr/local/openvpn_as/bin/ovpn-init"
 
 echo "=> Installing OpenVPN 2.5 <="
-sudo rpm -i --force "$OPENVPN_FILE" > /dev/null 2>&1
+rpm -i --force "$OPENVPN_FILE" > /dev/null 2>&1
 
 echo "  - Prepare for Crack."
-sudo rm -f "$CRACK_FILE_PATH" > /dev/null 2>&1
+rm -f "$CRACK_FILE_PATH" > /dev/null 2>&1
 
 echo "  - Downloading crack file."
-sudo curl "$CRACK_FILE_LINK" -L -o "$CRACK_FILE_PATH" > /dev/null 2>&1
+curl "$CRACK_FILE_LINK" -L -o "$CRACK_FILE_PATH" > /dev/null 2>&1
 
 echo "  - Start cracking..."
-sudo sh "$SH_PATH" <<< "DELETE
+sh "$SH_PATH" <<< "DELETE
 yes
 
 1
@@ -43,5 +43,5 @@ echo "Client UI: https://$IPADDR:943/"
 echo "Login as \"openvpn\" with the same password used to authenticate to this UNIX host."
 echo ""
 echo "  - Set a password for openvpn"
-sudo passwd openvpn
+passwd openvpn
 echo "=> DONE <="
