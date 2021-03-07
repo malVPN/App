@@ -33,6 +33,6 @@ yes
 
 
 " > /dev/null 2>&1
-sleep 1
+sleep 3
 echo "- Set password for openvpn"
 sudo passwd openvpn
