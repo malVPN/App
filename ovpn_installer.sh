@@ -42,6 +42,5 @@ echo "Admin  UI: https://$IPADDR:943/admin"
 echo "Client UI: https://$IPADDR:943/"
 echo "Login as \"openvpn\" with the same password used to authenticate to this UNIX host."
 echo ""
-echo "  - Set a password for openvpn"
-passwd openvpn
+echo "Type \"passwd openvpn\" for set a password."
 echo "=> DONE <="
